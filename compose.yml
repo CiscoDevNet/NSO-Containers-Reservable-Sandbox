@@ -1,0 +1,47 @@
+networks:
+  NSO-net:
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GATEWAY}
+    driver: ipvlan
+    driver_opts:
+      ipvlan_mode: l2
+      parent: ${PARENT_INTERFACE:-ens160}
+
+services:
+  NODE-1:
+    container_name: ${NODE1}
+    hostname: ${NODE1}
+    networks:
+      NSO-net:
+        ipv4_address: ${NODE1_IP}
+    extends:
+      file: common-services.yml
+      service: NSO
+    profiles:
+      - nso
+
+  NODE-2:
+    container_name: ${NODE2}
+    hostname: ${NODE2}
+    networks:
+      NSO-net:
+        ipv4_address: ${NODE2_IP}
+    extends:
+      file: common-services.yml
+      service: NSO
+    profiles:
+      - nso
+
+  NODE-3:
+    container_name: ${NODE3}
+    hostname: ${NODE3}
+    networks:
+      NSO-net:
+        ipv4_address: ${NODE3_IP}
+    extends:
+      file: common-services.yml
+      service: NSO
+    profiles:
+      - nso

@@ -1,0 +1,9 @@
+# docker-compose.run.yml
+version: "3.8"
+services:
+  NODE-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NSO_VERSION=${NSO_VERSION}

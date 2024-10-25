@@ -1,0 +1,53 @@
+{
+  "name": "nso",
+  "image": "nso-devnet/reservable-sandbox:6.2.5",
+  "runArgs": ["--env-file", "sandbox_env_vars.sh"],
+  "overrideCommand": false,
+  "containerUser": "developer",
+  "forwardPorts": [22, 179, 443, 2024, 4369, 8080],
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.pylint",
+        "oderwat.indent-rainbow",
+        "esbenp.prettier-vscode",
+        "ms-python.black-formatter",
+        "aaron-bond.better-comments",
+        "ciscocrossworknso.nso-explorer",
+        "ciscocrossworknso.nso-ide",
+        "donjayamanne.python-environment-manager"
+      ],
+      "settings": {
+        "pylint.enabled": true,
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
+        "git.postCommitCommand": "push",
+        "git.ignoreLimitWarning": true,
+        "indentRainbow.ignoreErrorLanguages": ["*"],
+        "indentRainbow.colorOnWhiteSpaceOnly": true,
+        "indentRainbow.colors": [
+          "rgba(250, 244, 81, 0.714)",
+          "rgba(79, 255, 91, 0.714)",
+          "rgba(94, 207, 255, 0.571)",
+          "rgba(255, 173, 73, 0.632)"
+        ],
+        "NSO.Instance": [
+          {
+            "name": "nso container",
+            "host": "127.0.0.1",
+            "port": 8080,
+            "scheme": "http",
+            "username": "developer",
+            "password": "C1sco12345"
+          }
+        ]
+      }
+    }
+  }
+}
