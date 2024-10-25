@@ -1,16 +1,48 @@
 # NSO-Containers-Reservable-Sandbox
 
-Definiton of the NSO containers used for the Reservable Sandbox
+NSO is a top-notch tool for automating and orchestrating network services across both physical and virtual elements. NSO supports hundreds of devices from various network and infrastructure vendors. With NSO, you can manage services smoothly without disrupting the overall service, ensuring real-time delivery.
+
+The NSO Reservable Sandbox provides a hands-on experience with NSO APIs and network automation package development.
+
+On this repository, you can find **the files and configuration used to built the NSO containers for the sandbox**.
+
+> [!IMPORTANT] >
+> **No NSO container or NED artifacts are present on this repository**. You can find an trial container version on the documentation [Download Your NSO Free Trial Installer and Cisco NEDs](https://developer.cisco.com/docs/nso/getting-and-installing-nso/#download-your-nso-free-trial-installer-and-cisco-neds) click on the link and look for the files containing `container-image-prod`, then pick your architecture.
+
+You can find the [NSO Reservable Sandbox here.](https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso)
+
+## Building and Running
+
+All files needed to build the iamge are present on this repository. If you want to build and run a container from this repository, you must do the following changes:
+
+- Specify the NSO version on the `NSO_VERSION` env var.
+- Replace `nso-devnet/reservable-sandbox` to set the tag name you want to use for the image built.
+- Replace `cisco-nso/cisco-nso-prod` with the image name of the NSO container to be use as a base image.
+
+> [!TIP] >
+> Use your IDE search capabilities to find all the ocurrence of the names across the repo.
 
 ## Development
 
-To **upgrade the NSO version**, update the [NSO_VERSION variable on the sandbox_env_vars.sh file,](sandbox_env_vars.sh#L1) the `Makefile` file will take care of the rest.
+### Build
 
-For local development _Build and Run_ a container.
+The [Makefile](Makefile) on the root of the project takes care of using the right docker commands.
+
+For building the initial container you can do.
 
 ```bash
-make all
+make build
 ```
+
+### Working with the runtime with Make
+
+For working with the runtime environment there are two options.
+
+```bash
+make run follow
+```
+
+`Ctrl + c` to stop the docker log command
 
 Enter the container.
 
@@ -18,13 +50,21 @@ Enter the container.
 make cli
 ```
 
-The NSO configuration file is named `ncs.conf.xml` to allow the editor highlight it and treat it as `xml`. Then on the dockerfile is copied as `ncs.conf`.
+#### Working with the runtime with Dev Containers
+
+Additionally, you can use dev container to interact directly with NSO through your IDE such as VS Code.
+
+On MacOS you can do.
+
+`cmd + p` and `> rebuild and reopen in container`
+
+This will open a new window, install extensions and configure VS Code to work with NSO. See the configuration used on [the devcontainer.json file](.devcontainer/devcontainer.json)
 
 ## Credentials
 
-The credentials provided are `developer/C1sco12345`
+The credentials used `developer/C1sco12345` on the contrainer [are hardcoded.](Dockerfile#L23) This allow us to garantee the containers will always have the same credentials, which in a sandbox environment is desired. **For production, you will never want to do this.**
 
-> **NOTE:** The container runs as `developer` user without any root priviledges.
+> **NOTE:** The container runs as `developer` user without any root priviledges. `sudo` is not installed.
 
 ## Adding NEDs
 
@@ -32,19 +72,37 @@ Add the `signed.bin` file, for example `ncs-6.2.3-cisco-ios-6.106.5.signed.bin` 
 
 The [setup_add_neds.sh script](scripts/setup_add_neds.sh) will automatically unpack and add the NEDs to the docker image.
 
+For more information see the [NEDs Readme.](neds/README.md)
+
 ## Packages
 
 One [example package router](packages/router) is included, for users to use as a starting point.
 
 A third party package [rest-api-explorer.tar.gz](https://gitlab.com/nso-developer/rest-api-explorer/-/tree/master) is used for the sandbox, you can add it as well if desired. This package is for helping users with REST APIs.
 
+For more information see the [Package Readme.](packages/README.md)
+
 ## SSH
 
 For `ssh` to work as non-root, [PAM auth is enabled.](config/ssh/sshd_config#L96)
 
-## Memory changes
+## Learn More
 
-Changes done on the VM. Under `/etc/sysctl.conf` add these lines
+To learn more about the official NSO container, see the [Containerized NSO](https://developer.cisco.com/docs/nso/guides/containerized-nso) documentation.
+
+The [NSO reservable sandbox link(https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso)
+
+## Need Help?
+
+Feel free to ask your question on the [NSO Developer Hub](https://community.cisco.com/t5/nso-developer-hub/ct-p/5672j-dev-nso)
+
+## Apendix
+
+### Memory changes
+
+The VM used by the sandbox had to be tweaked to avoid the _Linux Out Of Memory Killer_ kill NSO without any clue.
+
+Under `/etc/sysctl.conf` we added these lines.
 
 ```bash
 vm.overcommit_memory = 2
