@@ -1,8 +1,8 @@
 # NSO-Containers-Reservable-Sandbox
 
-NSO is a top-notch tool for automating and orchestrating network services across both physical and virtual elements. NSO supports hundreds of devices from various network and infrastructure vendors. With NSO, you can manage services smoothly without disrupting the overall service, ensuring real-time delivery.
+NSO is a top-notch tool for automating and orchestrating network services across both physical and virtual elements. NSO supports hundreds of devices from various network and infrastructure vendors.
 
-The NSO Reservable Sandbox provides a hands-on experience with NSO APIs and network automation package development.
+The [NSO Reservable Sandbox](https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso) provides a hands-on experience with NSO APIs and network automation package development.
 
 On this repository, you can find **the files and configuration used to built the NSO containers for the sandbox**.
 
@@ -13,11 +13,11 @@ You can find the [NSO Reservable Sandbox here.](https://devnetsandbox.cisco.com/
 
 ## Building and Running
 
-All files needed to build the iamge are present on this repository. If you want to build and run a container from this repository, you must do the following changes:
+All files needed to build the image are present on this repository. If you want to build and run a container from this repository, you must do the following changes:
 
-- Specify the NSO version on the `NSO_VERSION` env var.
+- Specify the NSO version using the `NSO_VERSION` env var.
 - Replace `nso-devnet/reservable-sandbox` to set the tag name you want to use for the image built.
-- Replace `cisco-nso/cisco-nso-prod` with the image name of the NSO container to be use as a base image.
+- Replace `cisco-nso/cisco-nso-prod` with the image name of the NSO container to be use as a base image (the NSO container you downloaded).
 
 > [!TIP]
 > Use your IDE search capabilities to find all the ocurrence of the names across the repo.
@@ -34,7 +34,7 @@ For building the initial container you can do.
 make build
 ```
 
-### Working with the runtime with Make
+### Working using Make
 
 For working with the runtime environment there are two options.
 
@@ -42,7 +42,7 @@ For working with the runtime environment there are two options.
 make run follow
 ```
 
-`Ctrl + c` to stop the docker log command
+`Ctrl + c` to stop the docker log command (used by the follow make entry).
 
 Enter the container.
 
@@ -50,9 +50,9 @@ Enter the container.
 make cli
 ```
 
-#### Working with the runtime with Dev Containers
+### Working using Dev Containers
 
-Additionally, you can use dev container to interact directly with NSO through your IDE such as VS Code.
+Additionally, you can use [dev container](https://containers.dev/) to interact directly with NSO through your IDE such as VS Code.
 
 On MacOS you can do.
 
@@ -62,13 +62,16 @@ This will open a new window, install extensions and configure VS Code to work wi
 
 ## Credentials
 
-The credentials used `developer/C1sco12345` on the contrainer [are hardcoded.](Dockerfile#L23) This allow us to garantee the containers will always have the same credentials, which in a sandbox environment is desired. **For production, you will never want to do this.**
+The credentials used `developer/C1sco12345` on the contrainer [are hardcoded.](Dockerfile#L23) This allow us to garantee the containers will always have the same credentials, which in the sandbox environment _is desired for educational purposes._
 
-> **NOTE:** The container runs as `developer` user without any root priviledges. `sudo` is not installed.
+> [!CAUTION]
+> For production, never hard code credentials.
+
+The container runs as `developer` user without any root priviledges. `sudo` is not installed.
 
 ## Adding NEDs
 
-Add the `signed.bin` file, for example `ncs-6.2.3-cisco-ios-6.106.5.signed.bin` to the `neds` directory.
+To add your NEDs, copy the `signed.bin` file, for example `ncs-6.2.3-cisco-ios-6.106.5.signed.bin` to the `neds` directory.
 
 The [setup_add_neds.sh script](scripts/setup_add_neds.sh) will automatically unpack and add the NEDs to the docker image.
 
