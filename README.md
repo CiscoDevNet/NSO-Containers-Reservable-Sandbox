@@ -7,7 +7,7 @@ The NSO Reservable Sandbox provides a hands-on experience with NSO APIs and netw
 On this repository, you can find **the files and configuration used to built the NSO containers for the sandbox**.
 
 > [!IMPORTANT]
-> On this repository there **no NSO container or NED artifacts are present**. You can find an trial container version on the documentation [Download Your NSO Free Trial Installer and Cisco NEDs](https://developer.cisco.com/docs/nso/getting-and-installing-nso/#download-your-nso-free-trial-installer-and-cisco-neds) click on the link and look for the files containing `container-image-prod`, then pick your architecture.
+> On this repository there are **no NSO container or NED artifacts are present**. You can find an trial container version on the documentation [Download Your NSO Free Trial Installer and Cisco NEDs](https://developer.cisco.com/docs/nso/getting-and-installing-nso/#download-your-nso-free-trial-installer-and-cisco-neds) click on the link and look for the files containing `container-image-prod`, then pick your architecture.
 
 You can find the [NSO Reservable Sandbox here.](https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso)
 
