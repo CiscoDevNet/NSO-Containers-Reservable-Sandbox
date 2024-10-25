@@ -73,7 +73,7 @@ The container runs as `developer` user without any root priviledges. `sudo` is n
 
 To add your NEDs, copy the `signed.bin` file, for example `ncs-6.2.3-cisco-ios-6.106.5.signed.bin` to the `neds` directory.
 
-The [setup_add_neds.sh script](scripts/setup_add_neds.sh) will automatically unpack and add the NEDs to the docker image.
+The [setup_add_neds.sh script](scripts/setup_add_neds.sh) will automatically unpack and add the NEDs to the docker image at build time.
 
 For more information see the [NEDs Readme.](neds/README.md)
 
@@ -93,7 +93,7 @@ For `ssh` to work as non-root, [PAM auth is enabled.](config/ssh/sshd_config#L96
 
 To learn more about the official NSO container, see the [Containerized NSO](https://developer.cisco.com/docs/nso/guides/containerized-nso) documentation.
 
-The [NSO reservable sandbox link(https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso)
+Start playing with the [NSO reservable sandbox](https://devnetsandbox.cisco.com/DevNet/catalog/nso-sandbox_nso)
 
 ## Need Help?
 
@@ -103,7 +103,7 @@ Feel free to ask your question on the [NSO Developer Hub](https://community.cisc
 
 ### Memory changes
 
-The VM used by the sandbox had to be tweaked to avoid the _Linux Out Of Memory Killer_ kill NSO without any clue.
+The VM used by the sandbox had to be tweaked to avoid the _Linux Out Of Memory Killer_ kill NSO without any clue. This is documented on the [Containerized NSO](https://developer.cisco.com/docs/nso/guides/containerized-nso/#administrative-information) documentation, under _NSO System Dump and Disable Memory Overcommit_.
 
 Under `/etc/sysctl.conf` we added these lines.
 
