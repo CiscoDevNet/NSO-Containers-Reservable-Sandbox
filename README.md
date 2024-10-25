@@ -36,7 +36,7 @@ make build
 
 ### Working using Make
 
-For working with the runtime environment there are two options.
+You can start and watch NSO boot up with `run` and `follow`. This is useful when there are issues at the start of NSO.
 
 ```bash
 make run follow
@@ -52,7 +52,7 @@ make cli
 
 ### Working using Dev Containers
 
-Additionally, you can use [dev container](https://containers.dev/) to interact directly with NSO through your IDE such as VS Code.
+Additionally, you can use [dev containers](https://containers.dev/) to interact directly with NSO through your IDE. VS Code will open your environment inside the NSO container along with the terminal.
 
 On MacOS you can do.
 
