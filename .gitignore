@@ -1,0 +1,8 @@
+testing/
+.bash_history
+.env
+neds/*.signed.bin
+__pycache__/
+*.pyc
+*.tar
+docker-image-nso-reservable-container.tar

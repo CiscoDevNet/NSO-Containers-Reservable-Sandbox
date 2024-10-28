@@ -1,0 +1,12 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+  <authgroups>
+    <group>
+      <name>labadmin</name>
+      <default-map>
+        <remote-name>cisco</remote-name>
+        <remote-password>cisco</remote-password>
+        <remote-secondary-password>cisco</remote-secondary-password>
+      </default-map>
+    </group>
+  </authgroups>
+</devices>
